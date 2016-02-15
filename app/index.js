@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-
-class App extends Component {
-	render () {
-		return (
-			<h1>This is a boilerplate</h1>
-		)
-	}
-}
+import App from './components/App'
 
 export default App
 
