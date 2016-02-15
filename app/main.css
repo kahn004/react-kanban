@@ -51,8 +51,15 @@ pre {
 
 .add-note {
 	background-color: #fdfdfd;
-	border: 1px solid #ccc;
+	border: none;
+	box-shadow: 0 0 .3em .03em rgba(0, 0, 0, .3);
+	border-radius: 5px;
+	font-size: 18px;
+	line-height: .8;
+	transition: all .3s ease-in-out;
 }
+
+.add-note:hover { box-shadow: 0 0 .3em .03em rgba(0, 0, 0, .7); }
 
 .notes {
 	list-style: none;
@@ -71,17 +78,11 @@ pre {
 	transition: all .3s ease-in-out;
 }
 
-.note:hover {
-	box-shadow: 0 0 .3em .03em rgba(0, 0, 0, .7);
-}
+.note:hover { box-shadow: 0 0 .3em .03em rgba(0, 0, 0, .7); }
 
-.note:hover .delete-note {
-	visibility: visible;
-}
+.note:hover .delete-note { visibility: visible; }
 
-.note .task {
-	display: inline-block;
-}
+.note .task { display: inline-block; }
 
 .note .delete-note {
 	background-color: #fdfdfd;
