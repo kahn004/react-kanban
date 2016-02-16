@@ -1,8 +1,10 @@
 import uuid from 'node-uuid'
+import {connect} from 'react-redux'
+import {addTodo, updateTodo, deleteTodo} from '../actions/todo'
 import React, {Component} from 'react'
 import Notes from './Notes'
 
-export default class App extends Component {
+class App extends Component {
 
 	constructor (props) {
 
@@ -11,28 +13,11 @@ export default class App extends Component {
 		this.addNote = this.addNote.bind(this)
 		this.editNote = this.editNote.bind(this)
 		this.deleteNote = this.deleteNote.bind(this)
-
-		this.state = {
-			notes: [
-				{
-					id: uuid.v4(),
-					task: 'Task One'
-				},
-				{
-					id: uuid.v4(),
-					task: 'Task Two'
-				},
-				{
-					id: uuid.v4(),
-					task: 'Task Three'
-				}
-			]
-		}
 	}
 
 	render () {
 
-		var {notes} = this.state
+		var {dispatch, notes} = this.props
 
 		return (
 			<div>
@@ -47,13 +32,7 @@ export default class App extends Component {
 	}
 
 	addNote () {
-
-		this.setState({
-			notes: this.state.notes.concat([{
-				id: uuid.v4(),
-				task: 'New task'
-			}])
-		})
+		this.props.dispatch(addTodo('New task'))
 	}
 
 	editNote (id, task) {
@@ -62,22 +41,19 @@ export default class App extends Component {
 			return
 		}
 
-		var notes = this.state.notes.map(note => {
-
-			if (note.id === id && task) {
-				note.task = task
-			}
-
-			return note
-		})
-
-		this.setState({notes})
+		this.props.dispatch(updateTodo(id, task))
 	}
 
 	deleteNote (id) {
-
-		this.setState({
-			notes: this.state.notes.filter(note => note.id !== id)
-		})
+		this.props.dispatch(deleteTodo(id))
 	}
 }
+
+function select (state) {
+
+	return {
+		notes: state.todos
+	}
+}
+
+export default connect(select)(App)
